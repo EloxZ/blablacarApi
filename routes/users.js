@@ -139,7 +139,7 @@ module.exports = function (app, gestorBD) {
               } else {
                 res.send({
                   status: 200,
-                  data: { isVerified },
+                  data: { isVerified, usuario },
                 });
               }
             });
