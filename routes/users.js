@@ -113,20 +113,17 @@ module.exports = function (app, gestorBD) {
   app.get("/users/verify/:email", (req, res) => {
     const token = req.get("Authorization");
     const isVerified = verify(token);
+    let alreadyRegistered = true;
 
     if (!isVerified) {
       res.send({ status: 403, data: { msg: "Acceso denegado" } });
     } else {
-      gestorBD.obtenerItem(
-        { email: req.params.email },
-        "usuarios",
-        function (usuario) {
+      gestorBD.obtenerItem({ email: req.params.email }, "usuarios", function (usuario) {
           if (usuario.length != 0) {
-            res.send({ status: 200, data: { isVerified, usuario } });
+            res.send({ status: 200, data: {alreadyRegistered, isVerified, usuario } });
           } else {
             const nuevoUsuario = {
               email: req.params.email,
-              viajes: [],
             };
             gestorBD.insertarItem(nuevoUsuario, "usuarios", function (usuario) {
               if (usuario == null) {
