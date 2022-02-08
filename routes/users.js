@@ -67,7 +67,7 @@ module.exports = function (app, gestorBD) {
     });
   });
 
-  /*app.get("/users/:id", function (req, res) {
+  app.get("/users/:id", function (req, res) {
     console.log(req);
     let criterio = { _id: gestorBD.mongo.ObjectID(req.params.id) };
     gestorBD.obtenerItem(criterio, "usuarios", function (usuario) {
@@ -83,7 +83,7 @@ module.exports = function (app, gestorBD) {
         res.send({ status: 200, data: { usuario: usuario } });
       }
     });
-  });*/
+  });
 
   app.put("/users/:id", function (req, res) {
     let criterio = { _id: gestorBD.mongo.ObjectID(req.params.id) };
@@ -110,7 +110,7 @@ module.exports = function (app, gestorBD) {
     );
   });
 
-  app.get("/users/verify", (req, res) => {
+  app.get("/verify", (req, res) => {
     const token = req.get("Authorization");
     const isVerified = verify(token);
     let alreadyRegistered = true;

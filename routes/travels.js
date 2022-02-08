@@ -11,7 +11,7 @@ module.exports = function (app, gestorBD) {
       $and: [
         { lugar_salida: { $regex: ".*" + origen + ".*", $options: "i" } },
         { lugar_llegada: { $regex: ".*" + destino + ".*", $options: "i" } },
-        { id_pasajeros: req.query.passenger }
+        { id_pasajeros: { $in: [ req.query.passenger ] } }
       ]
     };
 
