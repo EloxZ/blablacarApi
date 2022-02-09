@@ -2,7 +2,7 @@ const { query } = require("express");
 
 module.exports = function (app, gestorBD) {
 
-    app.get('/conversations/messages', function (req, res) {
+    app.get('/conversation/messages', function (req, res) {
 
         let criterio = { $and: [{ "participantes": req.query.id1 }, { "participantes": req.query.id2 }] };
 
