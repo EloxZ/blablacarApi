@@ -68,6 +68,7 @@ module.exports = function (app, gestorBD) {
   });
 
   app.get("/users/:id", function (req, res) {
+    console.log(req);
     let criterio = { _id: gestorBD.mongo.ObjectID(req.params.id) };
     gestorBD.obtenerItem(criterio, "usuarios", function (usuario) {
       if (usuario == null) {
@@ -78,6 +79,7 @@ module.exports = function (app, gestorBD) {
           },
         });
       } else {
+        console.log(usuario);
         res.send({ status: 200, data: { usuario: usuario } });
       }
     });
@@ -112,7 +114,6 @@ module.exports = function (app, gestorBD) {
     const token = req.get("Authorization");
     const isVerified = verify(token);
     let alreadyRegistered = true;
-    console.log(isVerified)
 
     if (!isVerified) {
       res.send({ status: 403, data: { msg: "Acceso denegado" } });
@@ -135,7 +136,6 @@ module.exports = function (app, gestorBD) {
                   },
                 });
               } else {
-                console.log(usuario)
                 res.send({
                   status: 200,
                   data: { isVerified, usuario },
